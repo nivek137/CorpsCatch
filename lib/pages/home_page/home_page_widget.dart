@@ -58,7 +58,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Text(
+                'Hello World',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ],
           ),
         ),
       ),
