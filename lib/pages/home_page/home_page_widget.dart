@@ -61,7 +61,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             children: [
               Text(
                 'Hello World',
-                style: FlutterFlowTheme.of(context).bodyText1,
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 32.0,
+                    ),
               ),
             ],
           ),
