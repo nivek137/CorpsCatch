@@ -60,7 +60,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Text(
-                'Hi Test',
+                'Testing 123',
                 style: FlutterFlowTheme.of(context).subtitle2.override(
                       fontFamily: 'Poppins',
                       fontSize: 32.0,
