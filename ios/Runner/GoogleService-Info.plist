@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>31833848502-3asvccp1lnl6qktn1pkobvvsifpqfegm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.31833848502-3asvccp1lnl6qktn1pkobvvsifpqfegm</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>31833848502-8tvr9fjlokdc8o5marqv1ofnm2vl99go.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDajmZSxLsL4_7G7tVXStqfD-T7exyBpNg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>31833848502</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.corpscatch</string>
+	<key>PROJECT_ID</key>
+	<string>corpscatchfirebase</string>
+	<key>STORAGE_BUCKET</key>
+	<string>corpscatchfirebase.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:31833848502:ios:e4dbe54d226d77a99d8417</string>
+</dict>
+</plist>
