@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "31833848502",
+    "project_id": "corpscatchfirebase",
+    "storage_bucket": "corpscatchfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31833848502:android:1ead44fde8a3f8149d8417",
+        "android_client_info": {
+          "package_name": "com.mycompany.corpscatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31833848502-8tvr9fjlokdc8o5marqv1ofnm2vl99go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.corpscatch",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "31833848502-v842j4tl3eb4q5q9krn7c9goqi2dbivf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAva0Ge3z83RGK10NrD2M7enk5qKUeVVAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31833848502-v842j4tl3eb4q5q9krn7c9goqi2dbivf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "31833848502-3asvccp1lnl6qktn1pkobvvsifpqfegm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.corpscatch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
