@@ -1,3 +1,5 @@
+import '/auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -57,6 +59,39 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => SignUpPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      GoRouter.of(context).prepareAuthEvent();
+      if (_model.passwordController.text !=
+          _model.passwordConfirmController.text) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Passwords don\'t match!',
+            ),
+          ),
+        );
+        return;
+      }
+
+      final user = await createAccountWithEmail(
+        context,
+        _model.emailAddressController.text,
+        _model.passwordController.text,
+      );
+      if (user == null) {
+        return;
+      }
+
+      final usersCreateData = createUsersRecordData(
+        age: int.tryParse(_model.ageController.text),
+        name: _model.nameController.text,
+      );
+      await UsersRecord.collection.doc(user.uid).update(usersCreateData);
+
+      context.pushNamedAuth('MapPage', mounted);
+    });
 
     _model.nameController ??= TextEditingController();
     _model.emailAddressController ??= TextEditingController();
@@ -681,7 +716,48 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   0.0, 30.0, 0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              context.pushNamed('SignUpPage');
+                                              GoRouter.of(context)
+                                                  .prepareAuthEvent();
+                                              if (_model.passwordController
+                                                      .text !=
+                                                  _model
+                                                      .passwordConfirmController
+                                                      .text) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Passwords don\'t match!',
+                                                    ),
+                                                  ),
+                                                );
+                                                return;
+                                              }
+
+                                              final user =
+                                                  await createAccountWithEmail(
+                                                context,
+                                                _model.emailAddressController
+                                                    .text,
+                                                _model.passwordController.text,
+                                              );
+                                              if (user == null) {
+                                                return;
+                                              }
+
+                                              final usersCreateData =
+                                                  createUsersRecordData(
+                                                age: int.tryParse(
+                                                    _model.ageController.text),
+                                                name:
+                                                    _model.nameController.text,
+                                              );
+                                              await UsersRecord.collection
+                                                  .doc(user.uid)
+                                                  .update(usersCreateData);
+
+                                              context.pushNamedAuth(
+                                                  'MapPage', mounted);
                                             },
                                             text: 'Register',
                                             options: FFButtonOptions(

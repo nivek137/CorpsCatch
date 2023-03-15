@@ -8,19 +8,20 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'login_page_model.dart';
-export 'login_page_model.dart';
+import 'forgot_password_page_model.dart';
+export 'forgot_password_page_model.dart';
 
-class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key? key}) : super(key: key);
+class ForgotPasswordPageWidget extends StatefulWidget {
+  const ForgotPasswordPageWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginPageWidgetState createState() => _LoginPageWidgetState();
+  _ForgotPasswordPageWidgetState createState() =>
+      _ForgotPasswordPageWidgetState();
 }
 
-class _LoginPageWidgetState extends State<LoginPageWidget>
+class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget>
     with TickerProviderStateMixin {
-  late LoginPageModel _model;
+  late ForgotPasswordPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -57,26 +58,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      GoRouter.of(context).prepareAuthEvent();
-
-      final user = await signInWithEmail(
-        context,
-        _model.emailAddressController.text,
-        _model.passwordLoginController.text,
-      );
-      if (user == null) {
-        return;
-      }
-
-      context.pushNamedAuth('MapPage', mounted);
-    });
+    _model = createModel(context, () => ForgotPasswordPageModel());
 
     _model.emailAddressController ??= TextEditingController();
-    _model.passwordLoginController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -151,7 +135,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Text(
-                                          'Login',
+                                          'Forgot Password',
                                           style: FlutterFlowTheme.of(context)
                                               .title3
                                               .override(
@@ -243,128 +227,30 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 0.0),
-                                          child: Container(
-                                            width: 300.0,
-                                            child: TextFormField(
-                                              controller: _model
-                                                  .passwordLoginController,
-                                              autofocus: true,
-                                              obscureText: !_model
-                                                  .passwordLoginVisibility,
-                                              decoration: InputDecoration(
-                                                labelText: 'Password',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                                hintText:
-                                                    'Enter Your Password ...',
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                        ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                                contentPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 24.0,
-                                                            20.0, 24.0),
-                                                suffixIcon: InkWell(
-                                                  onTap: () => setState(
-                                                    () => _model
-                                                            .passwordLoginVisibility =
-                                                        !_model
-                                                            .passwordLoginVisibility,
-                                                  ),
-                                                  focusNode: FocusNode(
-                                                      skipTraversal: true),
-                                                  child: Icon(
-                                                    _model.passwordLoginVisibility
-                                                        ? Icons
-                                                            .visibility_outlined
-                                                        : Icons
-                                                            .visibility_off_outlined,
-                                                    color: Color(0xFF757575),
-                                                    size: 22.0,
-                                                  ),
-                                                ),
-                                              ),
-                                              style: TextStyle(
-                                                color: Color(0xFF080202),
-                                              ),
-                                              validator: _model
-                                                  .passwordLoginControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 30.0, 0.0, 20.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              GoRouter.of(context)
-                                                  .prepareAuthEvent();
-
-                                              final user =
-                                                  await signInWithEmail(
-                                                context,
-                                                _model.emailAddressController
-                                                    .text,
-                                                _model.passwordLoginController
-                                                    .text,
-                                              );
-                                              if (user == null) {
+                                              if (_model.emailAddressController
+                                                  .text.isEmpty) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Email required!',
+                                                    ),
+                                                  ),
+                                                );
                                                 return;
                                               }
-
-                                              context.pushNamedAuth(
-                                                  'MapPage', mounted);
+                                              await resetPassword(
+                                                email: _model
+                                                    .emailAddressController
+                                                    .text,
+                                                context: context,
+                                              );
+                                              context.safePop();
                                             },
-                                            text: 'Login',
+                                            text: 'Send Link',
                                             options: FFButtonOptions(
                                               width: 200.0,
                                               height: 50.0,
@@ -392,40 +278,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                             ),
                                           ).animateOnPageLoad(animationsMap[
                                               'buttonOnPageLoadAnimation']!),
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            context.pushNamed(
-                                                'ForgotPasswordPage');
-                                          },
-                                          text: 'Forgot Password',
-                                          options: FFButtonOptions(
-                                            width: 130.0,
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: Color(0xFFF1F4F8),
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
                                         ),
                                       ],
                                     ),
