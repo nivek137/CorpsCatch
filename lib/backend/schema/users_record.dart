@@ -31,6 +31,20 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
+  @BuiltValueField(wireName: 'experience_points')
+  int? get experiencePoints;
+
+  @BuiltValueField(wireName: 'coins_earned')
+  BuiltList<DocumentReference>? get coinsEarned;
+
+  bool? get coin1;
+
+  bool? get coin2;
+
+  bool? get coin3;
+
+  bool? get coin4;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -43,7 +57,13 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..displayName = ''
     ..photoUrl = ''
     ..uid = ''
-    ..phoneNumber = '';
+    ..phoneNumber = ''
+    ..experiencePoints = 0
+    ..coinsEarned = ListBuilder()
+    ..coin1 = false
+    ..coin2 = false
+    ..coin3 = false
+    ..coin4 = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -76,6 +96,11 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
+  int? experiencePoints,
+  bool? coin1,
+  bool? coin2,
+  bool? coin3,
+  bool? coin4,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -89,7 +114,13 @@ Map<String, dynamic> createUsersRecordData({
         ..photoUrl = photoUrl
         ..uid = uid
         ..createdTime = createdTime
-        ..phoneNumber = phoneNumber,
+        ..phoneNumber = phoneNumber
+        ..experiencePoints = experiencePoints
+        ..coinsEarned = null
+        ..coin1 = coin1
+        ..coin2 = coin2
+        ..coin3 = coin3
+        ..coin4 = coin4,
     ),
   );
 

@@ -69,13 +69,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? MapPageWidget() : HomePageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? MapPageWidget() : HomePageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : HomePageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -93,14 +93,74 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SignUpPageWidget(),
         ),
         FFRoute(
-          name: 'MapPage',
-          path: '/mapPage',
-          builder: (context, params) => MapPageWidget(),
+          name: 'Maps',
+          path: '/maps',
+          builder: (context, params) =>
+              params.isEmpty ? NavBarPage(initialPage: 'Maps') : MapsWidget(),
         ),
         FFRoute(
           name: 'ForgotPasswordPage',
           path: '/forgotPasswordPage',
           builder: (context, params) => ForgotPasswordPageWidget(),
+        ),
+        FFRoute(
+          name: 'ProfilePage',
+          path: '/profilePage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'ProfilePage')
+              : NavBarPage(
+                  initialPage: 'ProfilePage',
+                  page: ProfilePageWidget(),
+                ),
+        ),
+        FFRoute(
+          name: 'CollectionPage',
+          path: '/collectionPage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'CollectionPage')
+              : CollectionPageWidget(),
+        ),
+        FFRoute(
+          name: 'LeaderboardPage',
+          path: '/leaderboardPage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'LeaderboardPage')
+              : NavBarPage(
+                  initialPage: 'LeaderboardPage',
+                  page: LeaderboardPageWidget(),
+                ),
+        ),
+        FFRoute(
+          name: 'QuestionsPage',
+          path: '/questionsPage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'QuestionsPage')
+              : NavBarPage(
+                  initialPage: 'QuestionsPage',
+                  page: QuestionsPageWidget(),
+                ),
+        ),
+        FFRoute(
+          name: 'IndividualMapDetails',
+          path: '/individualMapDetails',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: IndividualMapDetailsWidget(
+              mapName: params.getParam(
+                  'mapName', ParamType.DocumentReference, false, ['maps']),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ActiveMap',
+          path: '/activeMap',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ActiveMapWidget(
+              mapName: params.getParam(
+                  'mapName', ParamType.DocumentReference, false, ['maps']),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
@@ -169,6 +229,7 @@ extension GoRouterExtensions on GoRouter {
           : appState.updateNotifyOnAuthChange(false);
   bool shouldRedirect(bool ignoreRedirect) =>
       !ignoreRedirect && appState.hasRedirect();
+  void clearRedirectLocation() => appState.clearRedirectLocation();
   void setRedirectLocationIfUnset(String location) =>
       (routerDelegate.refreshListenable as AppStateNotifier)
           .updateNotifyOnAuthChange(false);
