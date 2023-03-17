@@ -90,7 +90,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
       );
       await UsersRecord.collection.doc(user.uid).update(usersCreateData);
 
-      context.pushNamedAuth('MapPage', mounted);
+      context.pushNamedAuth('Maps', mounted);
     });
 
     _model.nameController ??= TextEditingController();
@@ -757,7 +757,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   .update(usersCreateData);
 
                                               context.pushNamedAuth(
-                                                  'MapPage', mounted);
+                                                  'Maps', mounted);
                                             },
                                             text: 'Register',
                                             options: FFButtonOptions(

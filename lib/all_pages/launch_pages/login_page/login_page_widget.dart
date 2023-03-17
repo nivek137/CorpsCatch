@@ -72,7 +72,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
         return;
       }
 
-      context.pushNamedAuth('MapPage', mounted);
+      context.pushNamedAuth('Maps', mounted);
     });
 
     _model.emailAddressController ??= TextEditingController();
@@ -362,7 +362,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               }
 
                                               context.pushNamedAuth(
-                                                  'MapPage', mounted);
+                                                  'Maps', mounted);
                                             },
                                             text: 'Login',
                                             options: FFButtonOptions(

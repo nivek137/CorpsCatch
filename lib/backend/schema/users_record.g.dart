@@ -81,6 +81,50 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.experiencePoints;
+    if (value != null) {
+      result
+        ..add('experience_points')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.coinsEarned;
+    if (value != null) {
+      result
+        ..add('coins_earned')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
+            ])));
+    }
+    value = object.coin1;
+    if (value != null) {
+      result
+        ..add('coin1')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.coin2;
+    if (value != null) {
+      result
+        ..add('coin2')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.coin3;
+    if (value != null) {
+      result
+        ..add('coin3')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.coin4;
+    if (value != null) {
+      result
+        ..add('coin4')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -139,6 +183,33 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'experience_points':
+          result.experiencePoints = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'coins_earned':
+          result.coinsEarned.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
+          break;
+        case 'coin1':
+          result.coin1 = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'coin2':
+          result.coin2 = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'coin3':
+          result.coin3 = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'coin4':
+          result.coin4 = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -172,6 +243,18 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? phoneNumber;
   @override
+  final int? experiencePoints;
+  @override
+  final BuiltList<DocumentReference<Object?>>? coinsEarned;
+  @override
+  final bool? coin1;
+  @override
+  final bool? coin2;
+  @override
+  final bool? coin3;
+  @override
+  final bool? coin4;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -187,6 +270,12 @@ class _$UsersRecord extends UsersRecord {
       this.uid,
       this.createdTime,
       this.phoneNumber,
+      this.experiencePoints,
+      this.coinsEarned,
+      this.coin1,
+      this.coin2,
+      this.coin3,
+      this.coin4,
       this.ffRef})
       : super._();
 
@@ -210,6 +299,12 @@ class _$UsersRecord extends UsersRecord {
         uid == other.uid &&
         createdTime == other.createdTime &&
         phoneNumber == other.phoneNumber &&
+        experiencePoints == other.experiencePoints &&
+        coinsEarned == other.coinsEarned &&
+        coin1 == other.coin1 &&
+        coin2 == other.coin2 &&
+        coin3 == other.coin3 &&
+        coin4 == other.coin4 &&
         ffRef == other.ffRef;
   }
 
@@ -223,15 +318,32 @@ class _$UsersRecord extends UsersRecord {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, email.hashCode),
-                                        password.hashCode),
-                                    name.hashCode),
-                                age.hashCode),
-                            displayName.hashCode),
-                        photoUrl.hashCode),
-                    uid.hashCode),
-                createdTime.hashCode),
-            phoneNumber.hashCode),
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    email
+                                                                        .hashCode),
+                                                                password
+                                                                    .hashCode),
+                                                            name.hashCode),
+                                                        age.hashCode),
+                                                    displayName.hashCode),
+                                                photoUrl.hashCode),
+                                            uid.hashCode),
+                                        createdTime.hashCode),
+                                    phoneNumber.hashCode),
+                                experiencePoints.hashCode),
+                            coinsEarned.hashCode),
+                        coin1.hashCode),
+                    coin2.hashCode),
+                coin3.hashCode),
+            coin4.hashCode),
         ffRef.hashCode));
   }
 
@@ -247,6 +359,12 @@ class _$UsersRecord extends UsersRecord {
           ..add('uid', uid)
           ..add('createdTime', createdTime)
           ..add('phoneNumber', phoneNumber)
+          ..add('experiencePoints', experiencePoints)
+          ..add('coinsEarned', coinsEarned)
+          ..add('coin1', coin1)
+          ..add('coin2', coin2)
+          ..add('coin3', coin3)
+          ..add('coin4', coin4)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -291,6 +409,33 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
+  int? _experiencePoints;
+  int? get experiencePoints => _$this._experiencePoints;
+  set experiencePoints(int? experiencePoints) =>
+      _$this._experiencePoints = experiencePoints;
+
+  ListBuilder<DocumentReference<Object?>>? _coinsEarned;
+  ListBuilder<DocumentReference<Object?>> get coinsEarned =>
+      _$this._coinsEarned ??= new ListBuilder<DocumentReference<Object?>>();
+  set coinsEarned(ListBuilder<DocumentReference<Object?>>? coinsEarned) =>
+      _$this._coinsEarned = coinsEarned;
+
+  bool? _coin1;
+  bool? get coin1 => _$this._coin1;
+  set coin1(bool? coin1) => _$this._coin1 = coin1;
+
+  bool? _coin2;
+  bool? get coin2 => _$this._coin2;
+  set coin2(bool? coin2) => _$this._coin2 = coin2;
+
+  bool? _coin3;
+  bool? get coin3 => _$this._coin3;
+  set coin3(bool? coin3) => _$this._coin3 = coin3;
+
+  bool? _coin4;
+  bool? get coin4 => _$this._coin4;
+  set coin4(bool? coin4) => _$this._coin4 = coin4;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -311,6 +456,12 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _uid = $v.uid;
       _createdTime = $v.createdTime;
       _phoneNumber = $v.phoneNumber;
+      _experiencePoints = $v.experiencePoints;
+      _coinsEarned = $v.coinsEarned?.toBuilder();
+      _coin1 = $v.coin1;
+      _coin2 = $v.coin2;
+      _coin3 = $v.coin3;
+      _coin4 = $v.coin4;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -332,18 +483,37 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   UsersRecord build() => _build();
 
   _$UsersRecord _build() {
-    final _$result = _$v ??
-        new _$UsersRecord._(
-            email: email,
-            password: password,
-            name: name,
-            age: age,
-            displayName: displayName,
-            photoUrl: photoUrl,
-            uid: uid,
-            createdTime: createdTime,
-            phoneNumber: phoneNumber,
-            ffRef: ffRef);
+    _$UsersRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$UsersRecord._(
+              email: email,
+              password: password,
+              name: name,
+              age: age,
+              displayName: displayName,
+              photoUrl: photoUrl,
+              uid: uid,
+              createdTime: createdTime,
+              phoneNumber: phoneNumber,
+              experiencePoints: experiencePoints,
+              coinsEarned: _coinsEarned?.build(),
+              coin1: coin1,
+              coin2: coin2,
+              coin3: coin3,
+              coin4: coin4,
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'coinsEarned';
+        _coinsEarned?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'UsersRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
