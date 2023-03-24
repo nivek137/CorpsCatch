@@ -265,7 +265,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.05),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
@@ -279,6 +279,40 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           await currentUserReference!.update(usersUpdateData);
                         },
                         text: 'Save Changes',
+                        options: FFButtonOptions(
+                          width: 340.0,
+                          height: 60.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                          elevation: 2.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed('HomePage');
+                        },
+                        text: 'Log Out',
                         options: FFButtonOptions(
                           width: 340.0,
                           height: 60.0,

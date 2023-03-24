@@ -44,7 +44,7 @@ class _$QuestionsRecordSerializer
     value = object.incorrectAnswer1;
     if (value != null) {
       result
-        ..add('incorrectAnswer1')
+        ..add('IncorrectAnswer1')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -104,7 +104,7 @@ class _$QuestionsRecordSerializer
           result.correctAnswer = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'incorrectAnswer1':
+        case 'IncorrectAnswer1':
           result.incorrectAnswer1 = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;

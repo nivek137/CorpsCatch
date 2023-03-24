@@ -18,6 +18,7 @@ abstract class QuestionsRecord
 
   String? get correctAnswer;
 
+  @BuiltValueField(wireName: 'IncorrectAnswer1')
   String? get incorrectAnswer1;
 
   @BuiltValueField(wireName: 'IncorrectAnswer2')
