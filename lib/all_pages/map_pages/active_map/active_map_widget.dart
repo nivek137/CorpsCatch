@@ -10,6 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'active_map_model.dart';
 export 'active_map_model.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
+import 'package:geolocator/geolocator.dart';
 
 class ActiveMapWidget extends StatefulWidget {
   const ActiveMapWidget({
@@ -24,6 +28,9 @@ class ActiveMapWidget extends StatefulWidget {
 }
 
 class _ActiveMapWidgetState extends State<ActiveMapWidget> {
+  String address = '';
+  double lat = 32.7316;
+  double long = -97.11246;
   late ActiveMapModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -84,11 +91,35 @@ class _ActiveMapWidgetState extends State<ActiveMapWidget> {
         centerTitle: true,
         elevation: 2.0,
       ),
+      
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Stack(
             children: [
+              SizedBox(
+              height: 200,
+              child: Center(child: Text(address)),
+            ),
+            SizedBox(
+              height: 700,
+
+              child: OpenStreetMapSearchAndPick(
+                // Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+                // 32.7316, -97.11246
+                center: LatLong(lat, long), buttonColor: Colors.blue, buttonText: 'Set Current Location',
+                //  UTA Woolf Hall
+                onPicked: (pickedData) {
+                  setState(() {
+                    address = pickedData.address;
+                    lat = pickedData.latLong.latitude;
+                    long = pickedData.latLong.longitude;
+                  });
+                  print(pickedData.latLong.latitude);
+                  print(pickedData.latLong.longitude);
+                  print(pickedData.address);
+                })
+            ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 0.0),
                 child: Row(

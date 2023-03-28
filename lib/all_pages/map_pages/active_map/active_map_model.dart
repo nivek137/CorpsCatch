@@ -25,6 +25,8 @@ class ActiveMapModel extends FlutterFlowModel {
     timerController.dispose();
   }
 
+  
+
   /// Additional helper methods are added here.
 
 }
