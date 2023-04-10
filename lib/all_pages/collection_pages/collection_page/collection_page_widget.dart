@@ -37,27 +37,29 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).black600,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Collections',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22.0,
-              ),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).black600,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Collections',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -72,14 +74,14 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 50.0, 0.0),
+                                0.0, 0.0, 30.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => Container(
                                 width: 170.0,
@@ -127,7 +129,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 50.0, 0.0),
+                                0.0, 0.0, 30.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => Container(
                                 width: 170.0,

@@ -36,32 +36,34 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).black600,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Leaderboard',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22.0,
-              ),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).black600,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Leaderboard',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,7 +73,9 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                       children: [
                         Text(
                           'Username',
-                          style: FlutterFlowTheme.of(context).title3.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -83,7 +87,9 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                       children: [
                         Text(
                           'Points',
-                          style: FlutterFlowTheme.of(context).title3.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -108,7 +114,7 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                           width: 50.0,
                           height: 50.0,
                           child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
                         ),
                       );
@@ -187,7 +193,7 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                                                                   CircularProgressIndicator(
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primaryColor,
+                                                                    .primary,
                                                               ),
                                                             ),
                                                           );
@@ -198,7 +204,7 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                                                           textUsersRecord.name!,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyText1,
+                                                              .bodyMedium,
                                                         );
                                                       },
                                                     ),
@@ -231,7 +237,7 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                                                                 CircularProgressIndicator(
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryColor,
+                                                                  .primary,
                                                             ),
                                                           ),
                                                         );
@@ -245,7 +251,7 @@ class _LeaderboardPageWidgetState extends State<LeaderboardPageWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText1,
+                                                                .bodyMedium,
                                                       );
                                                     },
                                                   ),

@@ -102,12 +102,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.05, 0.1),
             child: Container(
@@ -160,7 +162,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         Text(
                                           'Welcome to Corps Catch!',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily: 'Inter',
                                                 color: Color(0xFC050000),
@@ -186,7 +188,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               color: Color(0xFF4E9B70),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
@@ -221,7 +223,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             color: Color(0xFF4E9B70),
                                             textStyle: FlutterFlowTheme.of(
                                                     context)
-                                                .subtitle2
+                                                .titleSmall
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(

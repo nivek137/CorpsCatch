@@ -95,12 +95,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.05, 0.1),
             child: Container(
@@ -153,7 +155,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                         Text(
                                           'Login',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily: 'Inter',
                                                 color: Color(0xFF000101),
@@ -175,12 +177,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                 labelText: 'Your Email',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                 hintText:
                                                     'Enter Your Email ...',
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2
+                                                        .bodySmall
                                                         .override(
                                                           fontFamily:
                                                               'Lexend Deca',
@@ -256,12 +258,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                 labelText: 'Password',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                 hintText:
                                                     'Enter Your Password ...',
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2
+                                                        .bodySmall
                                                         .override(
                                                           fontFamily:
                                                               'Lexend Deca',
@@ -375,7 +377,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               color: Color(0xFF4E9B70),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
@@ -411,7 +413,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                             color: Color(0xFFF1F4F8),
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2
+                                                    .titleSmall
                                                     .override(
                                                       fontFamily: 'Poppins',
                                                       color:
@@ -419,6 +421,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                   context)
                                                               .secondaryText,
                                                     ),
+                                            elevation: 2.0,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,

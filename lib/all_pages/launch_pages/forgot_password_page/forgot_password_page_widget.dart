@@ -79,12 +79,14 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.05, 0.1),
             child: Container(
@@ -137,7 +139,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget>
                                         Text(
                                           'Forgot Password',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily: 'Inter',
                                                 color: Color(0xFF000101),
@@ -159,12 +161,12 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget>
                                                 labelText: 'Your Email',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                 hintText:
                                                     'Enter Your Email ...',
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2
+                                                        .bodySmall
                                                         .override(
                                                           fontFamily:
                                                               'Lexend Deca',
@@ -261,7 +263,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget>
                                               color: Color(0xFF4E9B70),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
