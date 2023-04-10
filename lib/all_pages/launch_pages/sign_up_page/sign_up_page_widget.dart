@@ -116,12 +116,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.05, 0.1),
             child: Container(
@@ -174,7 +176,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                         Text(
                                           'Register',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily: 'Inter',
                                                 color: Color(0xFF050101),
@@ -205,12 +207,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   labelStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText2,
+                                                          .bodySmall,
                                                   hintText: 'Enter Name ...',
                                                   hintStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText2
+                                                          .bodySmall
                                                           .override(
                                                             fontFamily:
                                                                 'Lexend Deca',
@@ -297,12 +299,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2,
+                                                            .bodySmall,
                                                     hintText: 'Enter Email ...',
                                                     hintStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2
+                                                            .bodySmall
                                                             .override(
                                                               fontFamily:
                                                                   'Lexend Deca',
@@ -396,12 +398,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   labelStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText2,
+                                                          .bodySmall,
                                                   hintText: 'Enter Age ...',
                                                   hintStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText2
+                                                          .bodySmall
                                                           .override(
                                                             fontFamily:
                                                                 'Lexend Deca',
@@ -491,13 +493,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2,
+                                                            .bodySmall,
                                                     hintText:
                                                         'Enter Password ...',
                                                     hintStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2
+                                                            .bodySmall
                                                             .override(
                                                               fontFamily:
                                                                   'Lexend Deca',
@@ -614,13 +616,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2,
+                                                            .bodySmall,
                                                     hintText:
                                                         'Enter Password Again ...',
                                                     hintStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText2
+                                                            .bodySmall
                                                             .override(
                                                               fontFamily:
                                                                   'Lexend Deca',
@@ -770,7 +772,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               color: Color(0xFF4E9B70),
                                               textStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .subtitle2
+                                                  .titleSmall
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     color: FlutterFlowTheme.of(

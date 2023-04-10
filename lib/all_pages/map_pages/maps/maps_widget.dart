@@ -39,27 +39,29 @@ class _MapsWidgetState extends State<MapsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).black600,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Map Page',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22.0,
-              ),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).black600,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Map Page',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -96,7 +98,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                           height: 50.0,
                                           child: CircularProgressIndicator(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                                .primary,
                                           ),
                                         ),
                                       );
@@ -110,7 +112,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                     return Text(
                                       'Hello ${textUsersRecord!.name}!',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 24.0,
@@ -135,7 +137,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                             Text(
                               'What trail would you like to go on today?',
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                           ],
                         ),
@@ -146,7 +148,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                         child: StreamBuilder<List<MapsRecord>>(
                           stream: queryMapsRecord(
                             queryBuilder: (mapsRecord) =>
-                                mapsRecord.orderBy('name'),
+                                mapsRecord.orderBy('distance'),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -156,8 +158,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                   width: 50.0,
                                   height: 50.0,
                                   child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    color: FlutterFlowTheme.of(context).primary,
                                   ),
                                 ),
                               );
@@ -194,7 +195,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                           child: Text(
                                             columnMapsRecord.name!,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
@@ -231,7 +232,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                                     'Distance: ${columnMapsRecord.distance?.toString()} miles',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1
+                                                        .bodyMedium
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           color: FlutterFlowTheme
@@ -240,16 +241,16 @@ class _MapsWidgetState extends State<MapsWidget> {
                                                         ),
                                                   ),
                                                   Text(
-                                                    'Altitude:  ${columnMapsRecord.distance?.toString()} feet',
+                                                    'Altitude:  ${columnMapsRecord.altitude?.toString()} feet',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1,
+                                                        .bodyMedium,
                                                   ),
                                                   Text(
                                                     'Duration:  ${columnMapsRecord.duration}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1,
+                                                        .bodyMedium,
                                                   ),
                                                 ],
                                               ),
@@ -272,14 +273,14 @@ class _MapsWidgetState extends State<MapsWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .bodyMedium,
                                                     ),
                                                     Text(
                                                       'Visited: ${columnMapsRecord.visited?.toString()}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .bodyMedium,
                                                     ),
                                                     FFButtonWidget(
                                                       onPressed: () async {
@@ -317,17 +318,18 @@ class _MapsWidgetState extends State<MapsWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryColor,
+                                                                .primary,
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2
+                                                                .titleSmall
                                                                 .override(
                                                                   fontFamily:
                                                                       'Poppins',
                                                                   color: Colors
                                                                       .white,
                                                                 ),
+                                                        elevation: 2.0,
                                                         borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,

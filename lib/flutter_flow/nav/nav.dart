@@ -108,10 +108,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/profilePage',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'ProfilePage')
-              : NavBarPage(
-                  initialPage: 'ProfilePage',
-                  page: ProfilePageWidget(),
-                ),
+              : ProfilePageWidget(),
         ),
         FFRoute(
           name: 'CollectionPage',
@@ -125,20 +122,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/leaderboardPage',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'LeaderboardPage')
-              : NavBarPage(
-                  initialPage: 'LeaderboardPage',
-                  page: LeaderboardPageWidget(),
-                ),
+              : LeaderboardPageWidget(),
         ),
         FFRoute(
-          name: 'QuestionsPage',
-          path: '/questionsPage',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'QuestionsPage')
-              : NavBarPage(
-                  initialPage: 'QuestionsPage',
-                  page: QuestionsPageWidget(),
-                ),
+          name: 'Q2',
+          path: '/q2',
+          builder: (context, params) => Q2Widget(),
         ),
         FFRoute(
           name: 'IndividualMapDetails',
@@ -161,6 +150,43 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'mapName', ParamType.DocumentReference, false, ['maps']),
             ),
           ),
+        ),
+        FFRoute(
+          name: 'QuestionsPage',
+          path: '/questionsPage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'QuestionsPage')
+              : QuestionsPageWidget(
+                  quizSetRef: params.getParam('quizSetRef',
+                      ParamType.DocumentReference, false, ['quizSet']),
+                  quizDuration: params.getParam('quizDuration', ParamType.int),
+                ),
+        ),
+        FFRoute(
+          name: 'QuizPage',
+          path: '/quizPage',
+          builder: (context, params) => QuizPageWidget(
+            scoreAcheived: params.getParam('scoreAcheived', ParamType.int),
+            totalQuestions: params.getParam('totalQuestions', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'putInQuiz',
+          path: '/putInQuiz',
+          builder: (context, params) => PutInQuizWidget(
+            quizSet: params.getParam(
+                'quizSet', ParamType.DocumentReference, false, ['quizSet']),
+          ),
+        ),
+        FFRoute(
+          name: 'ViewQuizSet',
+          path: '/viewQuizSet',
+          builder: (context, params) => ViewQuizSetWidget(),
+        ),
+        FFRoute(
+          name: 'putInQS',
+          path: '/putInQS',
+          builder: (context, params) => PutInQSWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
@@ -347,7 +373,7 @@ class FFRoute {
                     width: 50.0,
                     height: 50.0,
                     child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primaryColor,
+                      color: FlutterFlowTheme.of(context).primary,
                     ),
                   ),
                 )

@@ -5,6 +5,12 @@ import 'users_record.dart';
 import 'maps_record.dart';
 import 'questions_record.dart';
 import 'coins_record.dart';
+import 'quiz_set_record.dart';
+import 'quiz_record.dart';
+import 'question_a_record.dart';
+import 'question_b_record.dart';
+import 'question_c_record.dart';
+import 'question_d_record.dart';
 
 import 'index.dart';
 
@@ -19,6 +25,12 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   MapsRecord,
   QuestionsRecord,
   CoinsRecord,
+  QuizSetRecord,
+  QuizRecord,
+  QuestionARecord,
+  QuestionBRecord,
+  QuestionCRecord,
+  QuestionDRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
