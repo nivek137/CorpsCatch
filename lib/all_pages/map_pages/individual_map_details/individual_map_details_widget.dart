@@ -164,6 +164,11 @@ class _IndividualMapDetailsWidgetState
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
+                            setState(() {
+                              FFAppState().completedQuestions = 0;
+                              FFAppState().score = 0;
+                            });
+
                             context.pushNamed(
                               'ActiveMap',
                               queryParams: {

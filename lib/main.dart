@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'auth/firebase_user_provider.dart';
-import 'auth/auth_util.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -22,6 +22,7 @@ void main() async {
   await initFirebase();
 
   final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = ThemeMode.system;
 
-  late Stream<CorpsCatchFirebaseUser> userStream;
+  late Stream<BaseAuthUser> userStream;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -124,7 +125,6 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Maps': MapsWidget(),
-      'QuestionsPage': QuestionsPageWidget(),
       'LeaderboardPage': LeaderboardPageWidget(),
       'CollectionPage': CollectionPageWidget(),
       'ProfilePage': ProfilePageWidget(),
@@ -175,12 +175,12 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  FontAwesomeIcons.question,
+                  Icons.leaderboard,
                   color: currentIndex == 1 ? Color(0xFF0C0101) : Colors.black,
                   size: 24.0,
                 ),
                 Text(
-                  'Questions',
+                  'Leaderboard',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1 ? Color(0xFF0C0101) : Colors.black,
@@ -195,12 +195,12 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.leaderboard,
+                  FontAwesomeIcons.award,
                   color: currentIndex == 2 ? Color(0xFF0C0101) : Colors.black,
                   size: 24.0,
                 ),
                 Text(
-                  'Leaderboard',
+                  'Collections',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2 ? Color(0xFF0C0101) : Colors.black,
@@ -215,35 +215,15 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  FontAwesomeIcons.award,
-                  color: currentIndex == 3 ? Color(0xFF0C0101) : Colors.black,
-                  size: 24.0,
-                ),
-                Text(
-                  'Collections',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 3 ? Color(0xFF0C0101) : Colors.black,
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
                   Icons.person,
-                  color: currentIndex == 4 ? Color(0xFF0C0101) : Colors.black,
+                  color: currentIndex == 3 ? Color(0xFF0C0101) : Colors.black,
                   size: 24.0,
                 ),
                 Text(
                   'Profile',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: currentIndex == 4 ? Color(0xFF0C0101) : Colors.black,
+                    color: currentIndex == 3 ? Color(0xFF0C0101) : Colors.black,
                     fontSize: 11.0,
                   ),
                 ),

@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
 
-import '../../auth/firebase_user_provider.dart';
+import '../../auth/base_auth_user_provider.dart';
 
 import '../../index.dart';
 import '../../main.dart';
@@ -20,8 +20,8 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 class AppStateNotifier extends ChangeNotifier {
-  CorpsCatchFirebaseUser? initialUser;
-  CorpsCatchFirebaseUser? user;
+  BaseAuthUser? initialUser;
+  BaseAuthUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -46,7 +46,7 @@ class AppStateNotifier extends ChangeNotifier {
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
 
-  void update(CorpsCatchFirebaseUser newUser) {
+  void update(BaseAuthUser newUser) {
     initialUser ??= newUser;
     user = newUser;
     // Refresh the app on auth change unless explicitly marked otherwise.
@@ -125,11 +125,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : LeaderboardPageWidget(),
         ),
         FFRoute(
-          name: 'Q2',
-          path: '/q2',
-          builder: (context, params) => Q2Widget(),
-        ),
-        FFRoute(
           name: 'IndividualMapDetails',
           path: '/individualMapDetails',
           builder: (context, params) => NavBarPage(
@@ -154,20 +149,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'QuestionsPage',
           path: '/questionsPage',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'QuestionsPage')
-              : QuestionsPageWidget(
-                  quizSetRef: params.getParam('quizSetRef',
-                      ParamType.DocumentReference, false, ['quizSet']),
-                  quizDuration: params.getParam('quizDuration', ParamType.int),
-                ),
-        ),
-        FFRoute(
-          name: 'QuizPage',
-          path: '/quizPage',
-          builder: (context, params) => QuizPageWidget(
-            scoreAcheived: params.getParam('scoreAcheived', ParamType.int),
-            totalQuestions: params.getParam('totalQuestions', ParamType.int),
+          builder: (context, params) => QuestionsPageWidget(
+            quizSetRef: params.getParam(
+                'quizSetRef', ParamType.DocumentReference, false, ['quizSet']),
+            quizDuration: params.getParam('quizDuration', ParamType.int),
           ),
         ),
         FFRoute(
@@ -187,6 +172,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'putInQS',
           path: '/putInQS',
           builder: (context, params) => PutInQSWidget(),
+        ),
+        FFRoute(
+          name: 'CongratulationsPage',
+          path: '/congratulationsPage',
+          builder: (context, params) => CongratulationsPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -47,8 +47,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
           curve: Curves.easeInOut,
           delay: 250.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -63,7 +63,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       GoRouter.of(context).prepareAuthEvent();
 
-      final user = await signInWithEmail(
+      final user = await authManager.signInWithEmail(
         context,
         _model.emailAddressController.text,
         _model.passwordLoginController.text,
@@ -351,8 +351,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
 
-                                              final user =
-                                                  await signInWithEmail(
+                                              final user = await authManager
+                                                  .signInWithEmail(
                                                 context,
                                                 _model.emailAddressController
                                                     .text,

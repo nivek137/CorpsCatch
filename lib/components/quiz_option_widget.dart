@@ -51,6 +51,10 @@ class _QuizOptionWidgetState extends State<QuizOptionWidget> {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
       child: InkWell(
+        splashColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: () async {
           if (widget.isTrue!) {
             if (_model.isAnswered != null) {
@@ -58,11 +62,11 @@ class _QuizOptionWidgetState extends State<QuizOptionWidget> {
                 _model.isAnswered = null;
               });
               setState(() {
-                FFAppState().completedQuestions =
-                    FFAppState().completedQuestions + -1;
+                FFAppState().score = FFAppState().score + -100;
               });
               setState(() {
-                FFAppState().score = FFAppState().score + -1;
+                FFAppState().completedQuestions =
+                    FFAppState().completedQuestions + 1;
               });
             } else {
               setState(() {
@@ -73,7 +77,7 @@ class _QuizOptionWidgetState extends State<QuizOptionWidget> {
                     FFAppState().completedQuestions + 1;
               });
               setState(() {
-                FFAppState().score = FFAppState().score + 1;
+                FFAppState().score = FFAppState().score + 100;
               });
             }
           } else {
@@ -94,6 +98,12 @@ class _QuizOptionWidgetState extends State<QuizOptionWidget> {
                     FFAppState().completedQuestions + 1;
               });
             }
+          }
+
+          if (FFAppState().completedQuestions < 5) {
+            context.pushNamed('ActiveMap');
+          } else {
+            context.pushNamed('CongratulationsPage');
           }
         },
         child: Container(
