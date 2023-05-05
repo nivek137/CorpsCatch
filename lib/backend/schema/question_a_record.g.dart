@@ -35,6 +35,12 @@ class _$QuestionARecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -66,6 +72,10 @@ class _$QuestionARecordSerializer
           result.isTrue = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -85,12 +95,15 @@ class _$QuestionARecord extends QuestionARecord {
   @override
   final bool? isTrue;
   @override
+  final int? id;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$QuestionARecord([void Function(QuestionARecordBuilder)? updates]) =>
       (new QuestionARecordBuilder()..update(updates))._build();
 
-  _$QuestionARecord._({this.question, this.isTrue, this.ffRef}) : super._();
+  _$QuestionARecord._({this.question, this.isTrue, this.id, this.ffRef})
+      : super._();
 
   @override
   QuestionARecord rebuild(void Function(QuestionARecordBuilder) updates) =>
@@ -106,6 +119,7 @@ class _$QuestionARecord extends QuestionARecord {
     return other is QuestionARecord &&
         question == other.question &&
         isTrue == other.isTrue &&
+        id == other.id &&
         ffRef == other.ffRef;
   }
 
@@ -114,6 +128,7 @@ class _$QuestionARecord extends QuestionARecord {
     var _$hash = 0;
     _$hash = $jc(_$hash, question.hashCode);
     _$hash = $jc(_$hash, isTrue.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -124,6 +139,7 @@ class _$QuestionARecord extends QuestionARecord {
     return (newBuiltValueToStringHelper(r'QuestionARecord')
           ..add('question', question)
           ..add('isTrue', isTrue)
+          ..add('id', id)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -141,6 +157,10 @@ class QuestionARecordBuilder
   bool? get isTrue => _$this._isTrue;
   set isTrue(bool? isTrue) => _$this._isTrue = isTrue;
 
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -154,6 +174,7 @@ class QuestionARecordBuilder
     if ($v != null) {
       _question = $v.question;
       _isTrue = $v.isTrue;
+      _id = $v.id;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -177,7 +198,7 @@ class QuestionARecordBuilder
   _$QuestionARecord _build() {
     final _$result = _$v ??
         new _$QuestionARecord._(
-            question: question, isTrue: isTrue, ffRef: ffRef);
+            question: question, isTrue: isTrue, id: id, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

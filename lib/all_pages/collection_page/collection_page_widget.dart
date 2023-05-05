@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                                 child: Image.network(
                                   valueOrDefault<bool>(
                                           currentUserDocument?.coin1, false)
-                                      ? 'https://imgur.com/JojcElk'
+                                      ? 'https://i.imgur.com/rByaUF1.png'
                                       : 'https://i.imgur.com/PFSEqfQ.png?2',
                                   fit: BoxFit.cover,
                                 ),
@@ -111,7 +111,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                               child: Image.network(
                                 valueOrDefault<bool>(
                                         currentUserDocument?.coin2, false)
-                                    ? 'https://i.imgur.com/PFSEqfQ.png'
+                                    ? 'https://i.imgur.com/0fQ2Dd9.png'
                                     : 'https://i.imgur.com/PFSEqfQ.png',
                                 fit: BoxFit.cover,
                               ),
@@ -141,7 +141,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                                 child: Image.network(
                                   valueOrDefault<bool>(
                                           currentUserDocument?.coin3, false)
-                                      ? 'https://i.imgur.com/PFSEqfQ.png'
+                                      ? 'https://i.imgur.com/ZSyVqho.png'
                                       : 'https://i.imgur.com/PFSEqfQ.png',
                                   fit: BoxFit.cover,
                                 ),
@@ -159,7 +159,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                               child: Image.network(
                                 valueOrDefault<bool>(
                                         currentUserDocument?.coin4, false)
-                                    ? 'https://i.imgur.com/PFSEqfQ.png'
+                                    ? 'https://i.imgur.com/GLmVUhi.png'
                                     : 'https://i.imgur.com/PFSEqfQ.png',
                                 fit: BoxFit.cover,
                               ),

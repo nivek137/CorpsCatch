@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 class QuestionsPageModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
-  int pageNavigation = 0;
+  int pageNavigation = 1;
 
   ///  State fields for stateful widgets in this page.
 

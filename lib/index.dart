@@ -10,22 +10,21 @@ export '/all_pages/launch_pages/forgot_password_page/forgot_password_page_widget
     show ForgotPasswordPageWidget;
 export '/all_pages/profile_pages/profile_page/profile_page_widget.dart'
     show ProfilePageWidget;
-export '/all_pages/collection_pages/collection_page/collection_page_widget.dart'
+export '/all_pages/collection_page/collection_page_widget.dart'
     show CollectionPageWidget;
 export '/all_pages/leaderboard_pages/leaderboard_page/leaderboard_page_widget.dart'
     show LeaderboardPageWidget;
-export '/all_pages/question_pages/setup_pages/q2/q2_widget.dart' show Q2Widget;
 export '/all_pages/map_pages/individual_map_details/individual_map_details_widget.dart'
     show IndividualMapDetailsWidget;
 export '/all_pages/map_pages/active_map/active_map_widget.dart'
     show ActiveMapWidget;
 export '/all_pages/question_pages/questions_page/questions_page_widget.dart'
     show QuestionsPageWidget;
-export '/all_pages/question_pages/quiz_page/quiz_page_widget.dart'
-    show QuizPageWidget;
 export '/all_pages/question_pages/setup_pages/put_in_quiz/put_in_quiz_widget.dart'
     show PutInQuizWidget;
 export '/all_pages/question_pages/setup_pages/view_quiz_set/view_quiz_set_widget.dart'
     show ViewQuizSetWidget;
 export '/all_pages/question_pages/setup_pages/put_in_q_s/put_in_q_s_widget.dart'
     show PutInQSWidget;
+export '/all_pages/congratulations_page/congratulations_page_widget.dart'
+    show CongratulationsPageWidget;

@@ -16,6 +16,8 @@ abstract class QuestionARecord
   @BuiltValueField(wireName: 'is_true')
   bool? get isTrue;
 
+  int? get id;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -24,7 +26,8 @@ abstract class QuestionARecord
 
   static void _initializeBuilder(QuestionARecordBuilder builder) => builder
     ..question = ''
-    ..isTrue = false;
+    ..isTrue = false
+    ..id = 0;
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -55,13 +58,15 @@ abstract class QuestionARecord
 Map<String, dynamic> createQuestionARecordData({
   String? question,
   bool? isTrue,
+  int? id,
 }) {
   final firestoreData = serializers.toFirestore(
     QuestionARecord.serializer,
     QuestionARecord(
       (q) => q
         ..question = question
-        ..isTrue = isTrue,
+        ..isTrue = isTrue
+        ..id = id,
     ),
   );
 

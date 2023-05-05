@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -48,8 +48,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
           curve: Curves.easeInOut,
           delay: 420.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -75,7 +75,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
         return;
       }
 
-      final user = await createAccountWithEmail(
+      final user = await authManager.createAccountWithEmail(
         context,
         _model.emailAddressController.text,
         _model.passwordController.text,
@@ -736,8 +736,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                 return;
                                               }
 
-                                              final user =
-                                                  await createAccountWithEmail(
+                                              final user = await authManager
+                                                  .createAccountWithEmail(
                                                 context,
                                                 _model.emailAddressController
                                                     .text,

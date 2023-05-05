@@ -36,6 +36,11 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  int get pageViewCurrentIndex => _model.pageViewController != null &&
+          _model.pageViewController!.hasClients &&
+          _model.pageViewController!.page != null
+      ? _model.pageViewController!.page!.round()
+      : 0;
 
   @override
   void initState() {
@@ -47,6 +52,11 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
       _model.instantTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
+          await _model.pageViewController?.animateToPage(
+            FFAppState().completedQuestions,
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
           _model.timerController.onExecute.add(StopWatchExecute.start);
         },
         startImmediately: true,
@@ -108,7 +118,9 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
               elevation: 2.0,
             ),
             body: SafeArea(
-              child: Column(
+              child:
+                  // added filter to q choice A for id (added id = 0 to firestore) to equal completedQuestions (app state_ also added a couple of text to try to test variables
+                  Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
@@ -144,32 +156,36 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                     size: 24.0,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 5.0, 0.0),
-                                  child: FlutterFlowTimer(
-                                    initialTime: _model.timerMilliseconds,
-                                    getDisplayTime: (value) =>
-                                        StopWatchTimer.getDisplayTime(
-                                      value,
-                                      hours: false,
-                                      minute: false,
-                                      milliSecond: false,
+                                if (_model.timerMilliseconds > 0)
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    child: FlutterFlowTimer(
+                                      initialTime: _model.timerMilliseconds,
+                                      getDisplayTime: (value) =>
+                                          StopWatchTimer.getDisplayTime(
+                                        value,
+                                        hours: false,
+                                        minute: false,
+                                        milliSecond: false,
+                                      ),
+                                      timer: _model.timerController,
+                                      updateStateInterval:
+                                          Duration(milliseconds: 1000),
+                                      onChanged:
+                                          (value, displayTime, shouldUpdate) {
+                                        _model.timerMilliseconds = value;
+                                        _model.timerValue = displayTime;
+                                        if (shouldUpdate) setState(() {});
+                                      },
+                                      onEnded: () async {
+                                        context.pushNamed('ActiveMap');
+                                      },
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
                                     ),
-                                    timer: _model.timerController,
-                                    updateStateInterval:
-                                        Duration(milliseconds: 1000),
-                                    onChanged:
-                                        (value, displayTime, shouldUpdate) {
-                                      _model.timerMilliseconds = value;
-                                      _model.timerValue = displayTime;
-                                      if (shouldUpdate) setState(() {});
-                                    },
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -187,7 +203,8 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                   ),
                                   TextSpan(
                                     text: valueOrDefault<String>(
-                                      (_model.pageNavigation + 1).toString(),
+                                      (FFAppState().completedQuestions + 1)
+                                          .toString(),
                                       '0',
                                     ),
                                     style: TextStyle(),
@@ -206,7 +223,7 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                     child: LinearPercentIndicator(
-                      percent: 0.2,
+                      percent: (FFAppState().completedQuestions) / 5,
                       width: MediaQuery.of(context).size.width * 1.0,
                       lineHeight: 10.0,
                       animation: true,
@@ -260,11 +277,45 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             5.0, 10.0, 5.0, 0.0),
-                                        child: Text(
-                                          pageViewQuizRecord.question!,
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                        child: StreamBuilder<List<QuizRecord>>(
+                                          stream: queryQuizRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<QuizRecord>
+                                                textQuizRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textQuizRecord =
+                                                textQuizRecordList.isNotEmpty
+                                                    ? textQuizRecordList.first
+                                                    : null;
+                                            return Text(
+                                              pageViewQuizRecord.question!,
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            );
+                                          },
                                         ),
                                       ),
                                     ),
@@ -410,8 +461,8 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                         );
                                       },
                                     ),
-                                    StreamBuilder<List<QuestionDRecord>>(
-                                      stream: queryQuestionDRecord(
+                                    FutureBuilder<List<QuestionDRecord>>(
+                                      future: queryQuestionDRecordOnce(
                                         parent: pageViewQuizRecord.reference,
                                         singleRecord: true,
                                       ),
@@ -433,10 +484,6 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                         List<QuestionDRecord>
                                             quizOptionQuestionDRecordList =
                                             snapshot.data!;
-                                        // Return an empty Container when the item does not exist.
-                                        if (snapshot.data!.isEmpty) {
-                                          return Container();
-                                        }
                                         final quizOptionQuestionDRecord =
                                             quizOptionQuestionDRecordList
                                                     .isNotEmpty
@@ -445,7 +492,7 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                                 : null;
                                         return QuizOptionWidget(
                                           key: Key(
-                                              'Key6mz_${pageViewIndex}_of_${pageViewQuizRecordList.length}'),
+                                              'Keyv2l_${pageViewIndex}_of_${pageViewQuizRecordList.length}'),
                                           questionNum: 'D',
                                           questionName:
                                               quizOptionQuestionDRecord!
@@ -475,11 +522,18 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              if (questionsPageCount <= 5) {
-                                await _model.pageViewController?.nextPage(
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.ease,
-                                );
+                              if (FFAppState().completedQuestions <= 5) {
+                                FFAppState().update(() {
+                                  FFAppState().completedQuestions =
+                                      FFAppState().completedQuestions + 1;
+                                });
+                                setState(() {
+                                  _model.pageNavigation =
+                                      _model.pageNavigation + 1;
+                                });
+
+                                context.pushNamed('ActiveMap');
+
                                 if (questionsPageCount !=
                                     _model.pageNavigation) {
                                   setState(() {
@@ -488,19 +542,7 @@ class _QuestionsPageWidgetState extends State<QuestionsPageWidget> {
                                   });
                                 }
                               } else {
-                                context.pushNamed(
-                                  'QuizPage',
-                                  queryParams: {
-                                    'scoreAcheived': serializeParam(
-                                      FFAppState().score,
-                                      ParamType.int,
-                                    ),
-                                    'totalQuestions': serializeParam(
-                                      questionsPageCount,
-                                      ParamType.int,
-                                    ),
-                                  }.withoutNulls,
-                                );
+                                context.pushNamed('CongratulationsPage');
 
                                 FFAppState().update(() {
                                   FFAppState().completedQuestions = 0;
